@@ -1,0 +1,246 @@
+#File written by RizomUV 2025.0.96.gd7fd59ee. Compilation :Sep 15 2025,14:05:29
+mtllib 带门的墙.mtl
+#begin vertices
+v -0.9989 -0.085 8.4056
+v 1.2704 -0.085 8.4056
+v 1.2704 -0.085 8.6133
+v -0.9989 -0.085 8.6133
+v -0.9989 3.3159 8.6133
+v 1.2704 3.3159 8.6133
+v 1.2704 3.3159 8.4056
+v -0.9989 3.3159 8.4056
+v 1.2704 2.1994 8.6133
+v -0.9989 2.1994 8.6133
+v -0.9989 0.074 8.6133
+v 1.2704 0.074 8.6133
+v 3.3666 2.1994 8.4056
+v 3.3666 2.1994 8.6133
+v 3.3666 0.074 8.6133
+v 3.3666 0.074 8.4056
+v -0.9989 2.1994 8.4056
+v 1.2704 2.1994 8.4056
+v 1.2704 0.074 8.4056
+v -0.9989 0.074 8.4056
+v -2.922 2.1994 8.6133
+v -2.922 2.1994 8.4056
+v -2.922 0.074 8.4056
+v -2.922 0.074 8.6133
+v 3.3666 -0.085 8.4056
+v 3.3666 -0.085 8.6133
+v -2.4169 -0.085 8.6133
+v -2.4169 -0.085 8.4056
+v 3.3666 3.3159 8.6133
+v 3.3666 3.3159 8.4056
+v -2.4169 3.3159 8.4056
+v -2.4169 3.3159 8.6133
+v -2.4169 0.074 8.6133
+v -2.4169 2.1994 8.6133
+v -2.4169 2.1994 8.4056
+v -2.4169 0.074 8.4056
+v -2.922 3.3159 8.6133
+v -2.922 3.3159 8.4056
+v -2.922 -0.085 8.6133
+v -2.922 -0.085 8.4056
+#end vertices
+
+#begin 80 textures vertices 
+vt 0.5835556 0.9604408 0
+vt 0.2822389 0.9604408 0
+vt 0.2822389 0.9328625 0
+vt 0.5835556 0.9328625 0
+vt 0.2592548 0.9685154 0
+vt 0.5605715 0.9685154 0
+vt 0.5605715 0.9960937 0
+vt 0.2592548 0.9960937 0
+vt 0.5704127 0.3139371 0
+vt 0.2639438 0.3120239 0
+vt 0.2676699 0.02532753 0
+vt 0.5727116 0.0281264 0
+vt 0.8906206 0.307228 0
+vt 0.8630423 0.307228 0
+vt 0.8630423 0.02501823 0
+vt 0.8906206 0.02501823 0
+vt 0.5835557 0.7766579 0
+vt 0.2822389 0.7766579 0
+vt 0.2822389 0.4944481 0
+vt 0.5835557 0.4944481 0
+vt 0.8747749 0.7766579 0
+vt 0.8471965 0.7766579 0
+vt 0.8471965 0.4944482 0
+vt 0.8747749 0.4944482 0
+vt 0.00390625 0.9604408 0
+vt 0.00390625 0.9328625 0
+vt 0.7718371 0.9328625 0
+vt 0.7718371 0.9604408 0
+vt 0.8389041 0.9685154 0
+vt 0.8389041 0.9960937 0
+vt 0.0709733 0.9960938 0
+vt 0.0709733 0.9685154 0
+vt 0.07569612 0.02823587 0
+vt 0.07188673 0.3137364 0
+vt 0.7718372 0.7766579 0
+vt 0.7718372 0.4944481 0
+vt 0.8747749 0.9249064 0
+vt 0.8471965 0.9249064 0
+vt 0.8389041 0.9328625 0
+vt 0.8389041 0.9604408 0
+vt 0.5835557 0.4733362 0
+vt 0.2822389 0.4733362 0
+vt 0.572909 0.006704129 0
+vt 0.267606 0.00390625 0
+vt 0.2651266 0.4626955 0
+vt 0.57027 0.464095 0
+vt 0.2822389 0.9249063 0
+vt 0.5835557 0.9249063 0
+vt 0.003906313 0.4944481 0
+vt 0.003906313 0.7766579 0
+vt 0.853066 0.3152053 0
+vt 0.8548774 0.02946091 0
+vt 0.2481433 0.04217648 0
+vt 0.2434018 0.2962483 0
+vt 0.007566612 0.02635585 0
+vt 0.003906358 0.3136304 0
+vt 0.8389041 0.7766579 0
+vt 0.8389041 0.4944481 0
+vt 0.003906313 0.4733362 0
+vt 0.8906206 0.003906273 0
+vt 0.8630423 0.003906273 0
+vt 0.8550158 0.008040674 0
+vt 0.07562242 0.006790215 0
+vt 0.7718372 0.4733362 0
+vt 0.8526641 0.465341 0
+vt 0.8630423 0.4554764 0
+vt 0.8906206 0.4554764 0
+vt 0.003906313 0.9249063 0
+vt 0.7718372 0.9249063 0
+vt 0.07407651 0.4643053 0
+vt 0.09151818 0.2969299 0
+vt 0.09640043 0.04385515 0
+vt 0.005935668 0.465341 0
+vt 0.003906323 0.9685154 0
+vt 0.003906323 0.9960937 0
+vt 0.8389041 0.9249063 0
+vt 0.008241114 0.005015529 0
+vt 0.8747749 0.4733362 0
+vt 0.8471965 0.4733362 0
+vt 0.8389041 0.4733362 0
+#end 80 textures vertices 
+
+#begin 7 normals 
+vn 0 -1 -0
+vn 0 1 -0
+vn 0 0 1
+vn 1 0 -0
+vn 0 0 -1
+vn -1 0 -0
+vn -1 0 0
+#end 7 normals 
+
+#begin 40 faces
+o 带门的墙
+usemtl wire_122038083
+g 带门的墙
+s 2
+f 1/1/1 2/2/1 3/3/1 4/4/1 
+s 4
+f 5/5/2 6/6/2 7/7/2 8/8/2 
+s 8
+f 9/9/3 10/10/3 11/11/3 12/12/3 
+s 16
+f 13/13/4 14/14/4 15/15/4 16/16/4 
+s 32
+f 17/17/5 18/18/5 19/19/5 20/20/5 
+s 64
+f 21/21/6 22/22/6 23/23/6 24/24/6 
+s 2
+f 2/2/1 25/25/1 26/26/1 3/3/1 
+f 4/4/1 27/27/1 28/28/1 1/1/1 
+s 4
+f 6/6/2 29/29/2 30/30/2 7/7/2 
+f 8/8/2 31/31/2 32/32/2 5/5/2 
+s 8
+f 14/51/3 9/9/3 12/12/3 15/52/3 
+f 21/56/3 24/55/3 33/33/3 34/34/3 
+s 32
+f 22/57/5 35/35/5 36/36/5 23/58/5 
+f 13/50/5 16/49/5 19/19/5 18/18/5 
+s 8
+f 9/9/3 6/46/3 5/45/3 10/10/3 
+s 16
+f 13/13/4 30/67/4 29/66/4 14/14/4 
+s 32
+f 17/17/5 8/48/5 7/47/5 18/18/5 
+s 64
+f 21/21/6 37/37/6 38/38/6 22/22/6 
+s 8
+f 14/51/3 29/65/3 6/46/3 9/9/3 
+f 10/10/3 5/45/3 32/70/3 34/34/3 
+s 32
+f 22/57/5 38/76/5 31/69/5 35/35/5 
+f 18/18/5 7/47/5 30/68/5 13/50/5 
+s 2
+f 27/27/1 39/39/1 40/40/1 28/28/1 
+s 4
+f 31/31/2 38/75/2 37/74/2 32/32/2 
+s 8
+f 27/63/3 4/44/3 11/11/3 33/33/3 
+f 32/70/3 37/73/3 21/56/3 34/34/3 
+s 32
+f 31/69/5 8/48/5 17/17/5 35/35/5 
+s 8
+f 11/11/3 4/44/3 3/43/3 12/12/3 
+s 16
+f 15/15/4 26/61/4 25/60/4 16/16/4 
+s 32
+f 19/19/5 2/42/5 1/41/5 20/20/5 
+s 64
+f 23/23/6 40/79/6 39/78/6 24/24/6 
+s 8
+f 12/12/3 3/43/3 26/62/3 15/52/3 
+f 24/55/3 39/77/3 27/63/3 33/33/3 
+s 32
+f 36/36/5 28/64/5 40/80/5 23/58/5 
+f 16/49/5 25/59/5 2/42/5 19/19/5 
+f 20/20/5 1/41/5 28/64/5 36/36/5 
+s off
+f 17/54/7 20/53/7 11/11/7 10/10/7 
+f 35/71/1 17/54/1 10/10/1 34/34/1 
+f 36/72/4 35/71/4 34/34/4 33/33/4 
+f 20/53/2 36/72/2 33/33/2 11/11/2 
+#end 40 faces
+
+#ZOMPROPERTIES_04{
+#ZOMPROPERTIES_04 table {Mesh table {SymPlane table {Point vector3d 0 0 0 Normal vector3d 1 0 0 Threshold double 0.01 
+#ZOMPROPERTIES_04 Enabled bool false EdgeID int -1 SymEdgeID int -1 UPos double 0.5 LocalMode bool false } RootGroup C
+#ZOMPROPERTIES_04 SubMeshGroup {Children table {Tile_0_0 CSubMeshGroup {Children table {} BBoxUV box3d 0 0 0 0 0 0 BBo
+#ZOMPROPERTIES_04 x3D box3d 0 0 0 0 0 0 Area3D double 0 AreaUV double 0 IsRoot bool false Properties table {Selected b
+#ZOMPROPERTIES_04 ool false Box box3d 0 1 0 1 0 1 U int 0 V int 0 NU int 0 NV int 0 Pack table {BoxFrameEdit bool fals
+#ZOMPROPERTIES_04 e Behavior string "Free" Locked bool false Scaling table {Optimization string "Fill" } } Hotspot tab
+#ZOMPROPERTIES_04 le {} } IsTile bool true PolyIDs ints { 5 30 17 3 28 15 1 8 9 23 0 6 7 22 4 29 35 33 12 20 26 34 13 
+#ZOMPROPERTIES_04 21 16 2 27 31 24 32 11 25 19 14 37 36 38 39 18 10 } } } BBoxUV box3d 0 0 0 0 0 0 BBox3D box3d 0 0 0 
+#ZOMPROPERTIES_04 0 0 0 Area3D double 0 AreaUV double 0 IsRoot bool true Properties table {Selected bool false Box box
+#ZOMPROPERTIES_04 3d 0 1 0 1 0 1 U int 0 V int 0 NU int 1 NV int 1 Pack table {Rotate table {Initial string "Automatic
+#ZOMPROPERTIES_04 " Min double 0 Max double 90 Step double 0 } ResolutionDivisor int 0 MapResolution int 2048 UsePixel
+#ZOMPROPERTIES_04 Unit bool true PaddingSize double 0.0078125 MarginSize double 0.00390625 PaddingSizePx int 16 Margin
+#ZOMPROPERTIES_04 SizePx int 8 Scaling table {TexelDensity double 1024 Mode int 2 Optimization string "Fill" } MaxMuta
+#ZOMPROPERTIES_04 tions int 1 Strategy string "Efficient" Sides string "Closed" } Hotspot table {} Tiling vector3d 1 1
+#ZOMPROPERTIES_04  1 TileRatioMode string "1:1" } IsTile bool false PolyIDs ints { } } Maps table {Pin CDataMap {PrimT
+#ZOMPROPERTIES_04 ype string "Vertex" Size int 1 DefaultValue double 0 ScaleType string "Normalized" MergeMode string 
+#ZOMPROPERTIES_04 "Max" MinValue double 0 MaxValue double 1 Data doubles { r 80 0 } } Density CDataMap {PrimType strin
+#ZOMPROPERTIES_04 g "Polygon" Size int 1 DefaultValue double 1 ScaleType string "Log" MergeMode string "Average" MinVa
+#ZOMPROPERTIES_04 lue double 0.1 MaxValue double 4 Data doubles { r 40 1 } } Protect CDataMap {PrimType string "Vertex
+#ZOMPROPERTIES_04 " Size int 1 DefaultValue double 0 ScaleType string "Normalized" MergeMode string "Average" MinValue
+#ZOMPROPERTIES_04  double -1 MaxValue double 1 Data doubles { r 80 0 } } } } }
+#ZOMPROPERTIES_04}
+
+
+#ZOMSCENE_01{
+#ZOMSCENE_01 CScene {Settings table {AxisSystem table {UpVector string "y" } Unit string "cm" TexelDensityDisplay
+#ZOMSCENE_01 Unit string "tx/cm" } Root CXForm {带门的墙 CPrim {PolyRange table {Low int 0 High int 39 } } } }
+#ZOMSCENE_01}
+
+#begin 0 fatal error vertex (that RizomUV cannot handle)
+#end 0 fatal error vertex (that RizomUV cannot handle)
+
+#begin 0 error vertex
+#end 0 error vertex
