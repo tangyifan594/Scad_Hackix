@@ -11,7 +11,8 @@ public class CampusWalker : MonoBehaviour
     float verticalSpeed,yaw,pitch;bool captured;
     void Awake()
     {
-        controller=GetComponent<CharacterController>();yaw=transform.eulerAngles.y;pitch=firstPerson?0:18;
+        firstPerson=false;topDown=false; // This game uses third-person follow.
+        controller=GetComponent<CharacterController>();yaw=transform.eulerAngles.y;pitch=18;
         if(visual)foreach(var r in visual.GetComponentsInChildren<Renderer>(true))r.forceRenderingOff=firstPerson;
         if(followCamera){followCamera.orthographic=false;followCamera.fieldOfView=65;followCamera.nearClipPlane=.06f;}
     }
@@ -53,7 +54,7 @@ public class CampusWalker : MonoBehaviour
     void OnGUI()
     {
         var style=new GUIStyle(GUI.skin.box){fontSize=16,alignment=TextAnchor.UpperLeft,padding=new RectOffset(16,16,12,12)};
-        GUI.Box(new Rect(18,18,440,88),"CAMPUS BEE FOLLOW\nWASD Move   Shift Run   Space Jump\nClick: Look   E: Elevator   B: Backpack   Esc: Cursor",style);
+        GUI.Box(new Rect(18,18,440,88),"CAMPUS BEE - THIRD PERSON\nWASD Move   Shift Run   Space Jump\nClick: Look   E: Elevator   B: Backpack   Esc: Cursor",style);
         if(captured)GUI.Box(new Rect(Screen.width/2f-2,Screen.height/2f-2,4,4),"");
     }
 }
