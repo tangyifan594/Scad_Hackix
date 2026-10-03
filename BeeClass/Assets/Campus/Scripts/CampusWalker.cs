@@ -4,9 +4,12 @@ public class CampusWalker : MonoBehaviour
 {
     public Transform visual,leftLeg,rightLeg,leftArm,rightArm;
     public Camera followCamera;
+    [Tooltip("Use the Canvas HUD instead of the legacy OnGUI HUD in this scene.")]
+    public bool useCanvasUI;
     public bool topDown=false;
     public bool firstPerson=false;
     public float eyeHeight=1.25f;
+    public bool Captured => captured;
     CharacterController controller;
     float verticalSpeed,yaw,pitch;bool captured;
     void Awake()
@@ -53,6 +56,7 @@ public class CampusWalker : MonoBehaviour
     }
     void OnGUI()
     {
+        if(useCanvasUI)return;
         var style=new GUIStyle(GUI.skin.box){fontSize=16,alignment=TextAnchor.UpperLeft,padding=new RectOffset(16,16,12,12)};
         GUI.Box(new Rect(18,18,440,88),"CAMPUS BEE - THIRD PERSON\nWASD Move   Shift Run   Space Jump\nClick: Look   E: Elevator   B: Backpack   Esc: Cursor",style);
         if(captured)GUI.Box(new Rect(Screen.width/2f-2,Screen.height/2f-2,4,4),"");

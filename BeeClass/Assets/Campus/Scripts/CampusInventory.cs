@@ -14,8 +14,12 @@ public class CampusInventory : MonoBehaviour
 {
     public const string SaveKey = "Hackthorn.CampusCards.v1";
     public List<CampusCard> catalog = new List<CampusCard>();
+    [Tooltip("Use the Canvas backpack instead of the legacy OnGUI backpack in this scene.")]
+    public bool useCanvasUI;
     public bool BackpackOpen { get; private set; }
     public int Count => collected.Count;
+    public string Toast => toast;
+    public float ToastUntil => toastUntil;
     readonly HashSet<string> collected = new HashSet<string>();
     string toast; float toastUntil; Vector2 scroll;
     GUIStyle heading, text, cardTitle, small, button;
@@ -81,6 +85,7 @@ public class CampusInventory : MonoBehaviour
     static void Fill(Rect rect,Color color) { var before=GUI.color; GUI.color=color;GUI.DrawTexture(rect,Texture2D.whiteTexture);GUI.color=before; }
     void OnGUI()
     {
+        if(useCanvasUI)return;
         Styles();
         if(!BackpackOpen)
         {
