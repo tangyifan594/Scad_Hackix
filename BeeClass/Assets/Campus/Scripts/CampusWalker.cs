@@ -11,11 +11,13 @@ public class CampusWalker : MonoBehaviour
     public float eyeHeight=1.25f;
     public bool Captured => captured;
     CharacterController controller;
+    Vector3 spawnPosition;
     float verticalSpeed,yaw,pitch;bool captured;
     void Awake()
     {
         firstPerson=false;topDown=false; // This game uses third-person follow.
         controller=GetComponent<CharacterController>();yaw=transform.eulerAngles.y;pitch=18;
+        spawnPosition=transform.position;
         if(visual)foreach(var r in visual.GetComponentsInChildren<Renderer>(true))r.forceRenderingOff=firstPerson;
         if(followCamera){followCamera.orthographic=false;followCamera.fieldOfView=65;followCamera.nearClipPlane=.06f;}
     }
@@ -34,7 +36,12 @@ public class CampusWalker : MonoBehaviour
         if(controller.isGrounded && k.spaceKey.wasPressedThisFrame)verticalSpeed=6;
         verticalSpeed-=18*Time.deltaTime;controller.Move((direction*(k.leftShiftKey.isPressed?5.4f:2.8f)+Vector3.up*verticalSpeed)*Time.deltaTime);
         if(visual && direction.sqrMagnitude>.01f)visual.rotation=Quaternion.Slerp(visual.rotation,Quaternion.LookRotation(direction),Time.deltaTime*12);
-        if(transform.position.y<-10){controller.enabled=false;transform.position=new Vector3(0,.1f,-12);controller.enabled=true;verticalSpeed=0;}
+        if(transform.position.y<-10){controller.enabled=false;transform.position=spawnPosition;controller.enabled=true;verticalSpeed=0;}
+    }
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        var door = hit.collider.GetComponentInParent<CampusDoorTransition>();
+        if (door) door.Enter(this);
     }
     void LateUpdate()
     {
