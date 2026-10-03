@@ -6,6 +6,8 @@ public class CampusWalker : MonoBehaviour
     public Camera followCamera;
     [Tooltip("Use the Canvas HUD instead of the legacy OnGUI HUD in this scene.")]
     public bool useCanvasUI;
+    [Tooltip("Allow left click to capture the cursor and use the mouse to rotate the camera.")]
+    public bool enableMouseLook=true;
     public bool topDown=false;
     public bool firstPerson=false;
     public float eyeHeight=1.25f;
@@ -26,10 +28,17 @@ public class CampusWalker : MonoBehaviour
         var k=Keyboard.current;var m=Mouse.current;if(k==null)return;
         var inventory=GetComponent<CampusInventory>();
         if((inventory && inventory.BackpackOpen)||CampusElevator.MenuOpen||CampusElevator.Travelling){captured=false;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;return;}
-        if(m!=null && m.leftButton.wasPressedThisFrame)captured=true;
-        if(k.escapeKey.wasPressedThisFrame)captured=false;
-        Cursor.lockState=captured?CursorLockMode.Locked:CursorLockMode.None;Cursor.visible=!captured;
-        if(captured && m!=null){var delta=m.delta.ReadValue();yaw+=delta.x*.10f;pitch=Mathf.Clamp(pitch-delta.y*.09f,-75,75);}
+        if(enableMouseLook)
+        {
+            if(m!=null && m.leftButton.wasPressedThisFrame)captured=true;
+            if(k.escapeKey.wasPressedThisFrame)captured=false;
+            Cursor.lockState=captured?CursorLockMode.Locked:CursorLockMode.None;Cursor.visible=!captured;
+            if(captured && m!=null){var delta=m.delta.ReadValue();yaw+=delta.x*.10f;pitch=Mathf.Clamp(pitch-delta.y*.09f,-75,75);}
+        }
+        else
+        {
+            captured=false;Cursor.lockState=CursorLockMode.None;Cursor.visible=true;
+        }
         var input=new Vector2((k.dKey.isPressed?1:0)-(k.aKey.isPressed?1:0),(k.wKey.isPressed?1:0)-(k.sKey.isPressed?1:0));input=Vector2.ClampMagnitude(input,1);
         var direction=Quaternion.Euler(0,yaw,0)*new Vector3(input.x,0,input.y);
         if(controller.isGrounded && verticalSpeed<0)verticalSpeed=-2;
