@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public static class CampusQuestMenuInstaller
 {
     const string Path = "Assets/Scenes/Level0-UI.unity";
-    const string Marker = "Library/CampusQuestMenu.done";
+    const string Marker = "Library/CampusQuestMenu.v3.done";
     [InitializeOnLoadMethod] static void Schedule() { EditorApplication.delayCall += Ready; }
     static void Ready()
     {
@@ -23,13 +23,40 @@ public static class CampusQuestMenuInstaller
     public static void Install()
     {
         if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-        var texture = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Menu/CampusQuestMenu.png");
+        if (!File.Exists("Assets/Art/Menu/BeeThereStartPressed.png")) return;
+        const string imagePath = "Assets/Art/Menu/CampusQuestMenu.png";
+        AssetDatabase.ImportAsset(imagePath, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+        var importer = AssetImporter.GetAtPath(imagePath) as TextureImporter;
+        if (importer)
+        {
+            importer.textureType = TextureImporterType.Default;
+            importer.mipmapEnabled = false;
+            importer.npotScale = TextureImporterNPOTScale.None;
+            importer.maxTextureSize = 8192;
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.SaveAndReimport();
+        }
+        var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(imagePath);
         if (!texture) { EditorApplication.delayCall += Ready; return; }
+        const string pressedPath = "Assets/Art/Menu/BeeThereStartPressed.png";
+        AssetDatabase.ImportAsset(pressedPath, ImportAssetOptions.ForceSynchronousImport | ImportAssetOptions.ForceUpdate);
+        var pressedImporter = AssetImporter.GetAtPath(pressedPath) as TextureImporter;
+        if (pressedImporter)
+        {
+            pressedImporter.textureType = TextureImporterType.Default;
+            pressedImporter.mipmapEnabled = false;
+            pressedImporter.npotScale = TextureImporterNPOTScale.None;
+            pressedImporter.maxTextureSize = 8192;
+            pressedImporter.textureCompression = TextureImporterCompression.Uncompressed;
+            pressedImporter.SaveAndReimport();
+        }
+        var pressedTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(pressedPath);
+        if (!pressedTexture) { EditorApplication.delayCall += Ready; return; }
         var scene = SceneManager.GetSceneByPath(Path);
         bool opened = !scene.IsValid() || !scene.isLoaded;
         if (opened) scene = EditorSceneManager.OpenScene(Path, OpenSceneMode.Additive);
         Directory.CreateDirectory("Archive/CampusQuestMenu");
-        if (!EditorSceneManager.SaveScene(scene, "Archive/CampusQuestMenu/Level0-before-menu.unity", true)) return;
+        if (!EditorSceneManager.SaveScene(scene, "Archive/CampusQuestMenu/Level0-before-hd-menu-" + System.DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".unity", true)) return;
         var menu = scene.GetRootGameObjects().SelectMany(r => r.GetComponentsInChildren<CampusMainMenu>(true)).FirstOrDefault();
         var canvas = scene.GetRootGameObjects().SelectMany(r => r.GetComponentsInChildren<Canvas>(true)).FirstOrDefault(c => c.name == "Main Menu Canvas");
         if (!menu || !canvas) { Debug.LogError("Level0 menu or canvas missing."); return; }
@@ -37,6 +64,7 @@ public static class CampusQuestMenuInstaller
         var oldUI = canvas.GetComponent<Scence1CanvasUI>();
         if (oldUI) Object.DestroyImmediate(oldUI);
         canvas.gameObject.SetActive(true);
+        canvas.transform.localScale = Vector3.one;
         canvas.enabled = true;
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.sortingOrder = 100;
@@ -54,7 +82,7 @@ public static class CampusQuestMenuInstaller
         var aspect = frame.gameObject.AddComponent<AspectRatioFitter>();
         aspect.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
         // Source image ratio, independent of texture import downscaling.
-        aspect.aspectRatio = 5050f / 2842f;
+        aspect.aspectRatio = (float)texture.width / texture.height;
         var image = frame.gameObject.AddComponent<RawImage>(); image.texture = texture; image.raycastTarget = false;
         var start = Hotspot(frame, "Start Button", 70, 418, 580, 554);
         var quit = Hotspot(frame, "Quit Button", 95, 797, 530, 905);
@@ -62,6 +90,8 @@ public static class CampusQuestMenuInstaller
         so.FindProperty("gameScene").stringValue = "Assets/Scenes/level1-Final.unity";
         so.FindProperty("startButton").objectReferenceValue = start;
         so.FindProperty("quitButton").objectReferenceValue = quit;
+        so.FindProperty("menuBackground").objectReferenceValue = image;
+        so.FindProperty("startPressedTexture").objectReferenceValue = pressedTexture;
         so.ApplyModifiedPropertiesWithoutUndo();
         var builds = EditorBuildSettings.scenes.ToList();
         foreach (string path in new[] { Path, "Assets/Scenes/level1-Final.unity" })

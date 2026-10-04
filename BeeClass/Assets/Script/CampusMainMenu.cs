@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 [DefaultExecutionOrder(-1000)]
 public class CampusMainMenu : MonoBehaviour
@@ -10,6 +11,8 @@ public class CampusMainMenu : MonoBehaviour
     [SerializeField] string gameScene = "Assets/Scenes/level1-Campus.unity";
     [SerializeField] Button startButton;
     [SerializeField] Button quitButton;
+    [SerializeField] RawImage menuBackground;
+    [SerializeField] Texture2D startPressedTexture;
     bool loading;
 
     void Awake()
@@ -56,6 +59,35 @@ public class CampusMainMenu : MonoBehaviour
             return;
         }
         loading = true;
+        if (menuBackground && startPressedTexture && startButton) StartCoroutine(AnimateStart());
+        else SceneManager.LoadSceneAsync(gameScene, LoadSceneMode.Single);
+    }
+
+    IEnumerator AnimateStart()
+    {
+        startButton.interactable = false;
+        var rect = (RectTransform)startButton.transform;
+        var layer = new GameObject("Start pressed animation", typeof(RectTransform), typeof(CanvasRenderer), typeof(RawImage));
+        var layerRect = (RectTransform)layer.transform;
+        layerRect.SetParent(rect, false);
+        layerRect.anchorMin = Vector2.zero; layerRect.anchorMax = Vector2.one;
+        layerRect.offsetMin = layerRect.offsetMax = Vector2.zero;
+        var image = layer.GetComponent<RawImage>();
+        image.texture = startPressedTexture;
+        // Both images use matching framing; only the Start paper changes.
+        image.uvRect = new Rect(rect.anchorMin, rect.anchorMax - rect.anchorMin);
+        image.raycastTarget = false;
+        Vector3 originalScale = rect.localScale;
+        float elapsed = 0;
+        while (elapsed < .38f)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / .38f);
+            image.color = new Color(1, 1, 1, Mathf.Clamp01(t * 4));
+            rect.localScale = originalScale * (1 + .025f * Mathf.Sin(t * Mathf.PI));
+            yield return null;
+        }
+        rect.localScale = originalScale;
         SceneManager.LoadSceneAsync(gameScene, LoadSceneMode.Single);
     }
 

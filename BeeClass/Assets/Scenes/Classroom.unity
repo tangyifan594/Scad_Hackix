@@ -6085,7 +6085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayableDirectorTimeEvent
   director: {fileID: 692024757}
-  triggerTime: 6.8
+  triggerTime: 6.648210048675537
   onTimeReached:
     m_PersistentCalls:
       m_Calls:
