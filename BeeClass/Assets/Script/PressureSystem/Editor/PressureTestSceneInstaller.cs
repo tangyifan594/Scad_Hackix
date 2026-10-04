@@ -13,7 +13,7 @@ public static class PressureTestSceneInstaller
 {
     const string ScenePath = "Assets/Scenes/Test.unity";
     const string MarkerPath = "Library/PressureTestSceneSetup.v9.done";
-    const string FontPath = "Assets/Art/test-Campus/UI/Scence1 UI Font.fontsettings";
+    const string FontPath = "Assets/Art/UIFonts/BeeClassChinese.ttf";
     const string ChoiceFontPath = "Assets/Art/UIFonts/BeeClassChinese.ttf";
     const string SpritePath = "Assets/Art/Ui/PressureFillSprite.asset";
     const string LockSpritePath = "Assets/Art/Ui/PressureUnlockLock.asset";
@@ -77,13 +77,6 @@ public static class PressureTestSceneInstaller
 
             Canvas canvas = FindInScene<Canvas>(scene);
             if(!canvas)canvas = CreateCanvas(scene);
-
-            CampusWalker walker = FindInScene<CampusWalker>(scene);
-            if(walker)
-            {
-                walker.enableMouseLook = false;
-                EditorUtility.SetDirty(walker);
-            }
 
             Sprite pressureSprite = EnsurePressureSprite();
             Sprite lockSprite = EnsureLockSprite();

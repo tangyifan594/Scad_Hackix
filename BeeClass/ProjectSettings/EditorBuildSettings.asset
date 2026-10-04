@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level2-shinei.unity
     guid: b40aff19bece6c04f9db47b34a57a40c
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 99773fa77a6824f4793f6c1f138e757f
+  - enabled: 1
+    path: Assets/Scenes/Level5.unity
+    guid: 2c6f8346673ced743bfd2abbe14bf4c7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
