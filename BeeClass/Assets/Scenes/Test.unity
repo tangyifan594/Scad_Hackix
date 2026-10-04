@@ -681,7 +681,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 718667044}
+      - m_Target: {fileID: 797771338}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -1254,8 +1254,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
+<<<<<<< Updated upstream:BeeClass/Assets/Scenes/Test.unity
     m_Font: {fileID: 12800000, guid: c4b47a25df854410a39988f71f8b7c23, type: 3}
     m_FontSize: 24
+=======
+    m_Font: {fileID: 12800000, guid: 649fba3b5bc439241a6b7f617cd711e7, type: 3}
+    m_FontSize: 31
+>>>>>>> Stashed changes:BeeClass/Assets/Scenes/Classroom.unity
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -11282,7 +11287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1552455946
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11361,7 +11366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1552533340
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11435,7 +11440,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98895f6ad5c269941ad90cd6ffb017be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadeInOnEnable
+<<<<<<< Updated upstream:BeeClass/Assets/Scenes/Test.unity
   duration: 1.5
+=======
+  duration: 3
+>>>>>>> Stashed changes:BeeClass/Assets/Scenes/Classroom.unity
   useUnscaledTime: 1
   disableInteractionDuringFade: 1
 --- !u!225 &1552533344
