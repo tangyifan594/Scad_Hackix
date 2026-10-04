@@ -11,12 +11,8 @@ public class PressureUnlock : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] Button actionButton;
-    [SerializeField] Image buttonImage;
     [SerializeField] GameObject lockVisual;
     [SerializeField] Text buttonLabel;
-    [SerializeField] Color lockedColor = new Color(.16f, .18f, .22f, .96f);
-    [SerializeField] Color unlockedColor = new Color(.20f, .48f, .72f, 1f);
-    [SerializeField] Color activatedColor = new Color(.82f, .12f, .12f, 1f);
 
     [Header("Events")]
     [SerializeField] UnityEvent onUnlocked = new UnityEvent();
@@ -70,7 +66,6 @@ public class PressureUnlock : MonoBehaviour
             buttonLabel.gameObject.SetActive(isUnlocked);
             buttonLabel.text = isActivated ? "已激活" : "点击激活";
         }
-        if(buttonImage)buttonImage.color = isActivated ? activatedColor : isUnlocked ? unlockedColor : lockedColor;
     }
 
     public void Activate()
@@ -81,13 +76,12 @@ public class PressureUnlock : MonoBehaviour
         onActivated.Invoke();
     }
 
-    public void Configure(PressureSystem system, float threshold, Button button, Image image, GameObject lockObject, Text label)
+    public void Configure(PressureSystem system, float threshold, Button button, GameObject lockObject, Text label)
     {
         if(pressureSystem)pressureSystem.OnPressureChanged -= HandlePressureChanged;
         pressureSystem = system;
         unlockBelowPressure = threshold;
         actionButton = button;
-        buttonImage = image;
         lockVisual = lockObject;
         buttonLabel = label;
         if(actionButton)actionButton.transition = Selectable.Transition.None;

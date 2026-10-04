@@ -12,11 +12,19 @@ using UnityEngine.UI;
 public static class PressureTestSceneInstaller
 {
     const string ScenePath = "Assets/Scenes/Test.unity";
-    const string MarkerPath = "Library/PressureTestSceneSetup.v6.done";
+    const string MarkerPath = "Library/PressureTestSceneSetup.v9.done";
     const string FontPath = "Assets/Art/test-Campus/UI/Scence1 UI Font.fontsettings";
+    const string ChoiceFontPath = "Assets/Art/UIFonts/BeeClassChinese.ttf";
     const string SpritePath = "Assets/Art/Ui/PressureFillSprite.asset";
     const string LockSpritePath = "Assets/Art/Ui/PressureUnlockLock.asset";
     const string PointerSpritePath = "Assets/Art/Ui/PressurePointer.asset";
+    const string CustomPointerPath = "Assets/Art/Ui/pressureBar_Pointer.png";
+    const string WindowTexturePath = "Assets/Art/Ui/Window.png";
+    const string ChoiceTexturePath = "Assets/Art/Ui/Choice_bottom.png";
+    const string PinTexturePath = "Assets/Art/Ui/Pin.png";
+    const string WindowSpritePath = "Assets/Art/Ui/Window_Cropped.asset";
+    const string ChoiceSpritePath = "Assets/Art/Ui/Choice_bottom_Cropped.asset";
+    const string PinSpritePath = "Assets/Art/Ui/Pin_Cropped.asset";
 
     [InitializeOnLoadMethod]
     static void ScheduleInstall()
@@ -79,13 +87,17 @@ public static class PressureTestSceneInstaller
 
             Sprite pressureSprite = EnsurePressureSprite();
             Sprite lockSprite = EnsureLockSprite();
-            Sprite pointerSprite = EnsurePointerSprite();
+            Sprite generatedPointerSprite = EnsurePointerSprite();
+            Sprite pointerSprite = AssetDatabase.LoadAssetAtPath<Sprite>(CustomPointerPath);
+            if(!pointerSprite)pointerSprite = generatedPointerSprite;
             Transform existing = canvas.transform.Find("Pressure UI");
             if(!existing)BuildPressureUI(canvas.transform, system, pressureSprite, pointerSprite);
             else ConfigureExistingPressureUI(existing, system, pointerSprite);
             existing = canvas.transform.Find("Pressure UI");
             EnsurePressureContinuousControls(existing, continuousChange, pressureSprite);
             EnsurePressureUnlock(existing, system, pressureSprite, lockSprite);
+            EnsurePressureWarning(scene, existing, system, pressureSprite);
+            EnsureChoiceWindow(canvas.transform);
             EnsureEventSystem(scene);
 
             EditorSceneManager.MarkSceneDirty(scene);
@@ -247,12 +259,11 @@ public static class PressureTestSceneInstaller
         {
             PressureUnlock unlock = existing.GetComponent<PressureUnlock>();
             Button existingButton = existing.GetComponentInChildren<Button>(true);
-            Image buttonImage = existingButton ? existingButton.GetComponent<Image>() : null;
             Transform lockTransform = existingButton ? existingButton.transform.Find("Lock Icon") : null;
             Transform labelTransform = existingButton ? existingButton.transform.Find("Text") : null;
             Text label = labelTransform ? labelTransform.GetComponent<Text>() : null;
             if(!unlock)unlock = existing.gameObject.AddComponent<PressureUnlock>();
-            unlock.Configure(system, 20f, existingButton, buttonImage, lockTransform ? lockTransform.gameObject : null, label);
+            unlock.Configure(system, 20f, existingButton, lockTransform ? lockTransform.gameObject : null, label);
             EditorUtility.SetDirty(unlock);
             return;
         }
@@ -273,8 +284,42 @@ public static class PressureTestSceneInstaller
         Image lockImage = lockObject.GetComponent<Image>();lockImage.sprite = lockSprite;lockImage.color = new Color(.92f, .94f, 1f, 1f);lockImage.preserveAspect = true;lockImage.raycastTarget = false;
 
         PressureUnlock pressureUnlock = root.AddComponent<PressureUnlock>();
-        pressureUnlock.Configure(system, 20f, button, buttonImageNew, lockObject, buttonLabel);
+        pressureUnlock.Configure(system, 20f, button, lockObject, buttonLabel);
         EditorUtility.SetDirty(button);EditorUtility.SetDirty(pressureUnlock);
+    }
+
+    static void EnsurePressureWarning(Scene scene, Transform pressureRoot, PressureSystem system, Sprite panelSprite)
+    {
+        if(!pressureRoot || !system)return;
+
+        Transform warningTransform = pressureRoot.Find("Pressure Warning");
+        GameObject warning;
+        if(warningTransform)warning = warningTransform.gameObject;
+        else
+        {
+            Font font = AssetDatabase.LoadAssetAtPath<Font>(FontPath);
+            if(!font)font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+
+            warning = Panel("Pressure Warning", pressureRoot, new Color(.72f,.08f,.08f,.96f));
+            SetRect(warning, new Vector2(.5f,1f), new Vector2(.5f,1f), new Vector2(.5f,1f), new Vector2(260,58), new Vector2(0,-24));
+            Image warningImage = warning.GetComponent<Image>();warningImage.sprite = panelSprite;warningImage.type = Image.Type.Sliced;warningImage.raycastTarget = false;
+            var textObject = UIObject("Text", warning.transform, typeof(Text));
+            Stretch(textObject, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+            Text text = textObject.GetComponent<Text>();text.font = font;text.text = "WARNING";text.fontSize = 28;text.fontStyle = FontStyle.Bold;text.alignment = TextAnchor.MiddleCenter;text.color = Color.white;text.raycastTarget = false;
+        }
+
+        PressureThresholdEvents thresholdEvents = FindInScene<PressureThresholdEvents>(scene);
+        if(!thresholdEvents)
+        {
+            var thresholdObject = new GameObject("Pressure Warning Threshold");
+            SceneManager.MoveGameObjectToScene(thresholdObject, scene);
+            thresholdEvents = thresholdObject.AddComponent<PressureThresholdEvents>();
+            UnityEventTools.AddBoolPersistentListener(thresholdEvents.OnPressureBelow, warning.SetActive, false);
+            UnityEventTools.AddBoolPersistentListener(thresholdEvents.OnPressureAbove, warning.SetActive, true);
+        }
+        thresholdEvents.Configure(system, 80f);
+        warning.SetActive(system.CurrentPressure > 80f);
+        EditorUtility.SetDirty(thresholdEvents);EditorUtility.SetDirty(warning);
     }
 
     static void EnsurePressureContinuousControls(Transform pressureRoot, PressureContinuousChange continuousChange, Sprite buttonSprite)
@@ -310,17 +355,15 @@ public static class PressureTestSceneInstaller
         if(pointer)
         {
             pointer.gameObject.name = "Pressure Pointer";
-            pointer.sprite = pointerSprite;
+            string currentSpritePath = pointer.sprite ? AssetDatabase.GetAssetPath(pointer.sprite) : string.Empty;
+            if(!pointer.sprite || currentSpritePath == PointerSpritePath)
+            {
+                pointer.sprite = pointerSprite;
+                pointer.color = Color.white;
+            }
             pointer.type = Image.Type.Simple;
-            pointer.color = new Color(1f,.73f,.12f,1);
             pointer.preserveAspect = true;
             pointer.raycastTarget = false;
-            RectTransform pointerRect = pointer.rectTransform;
-            pointerRect.anchorMin = new Vector2(.5f,.5f);
-            pointerRect.anchorMax = new Vector2(.5f,.5f);
-            pointerRect.pivot = new Vector2(.5f,.5f);
-            pointerRect.anchoredPosition = Vector2.zero;
-            pointerRect.sizeDelta = new Vector2(22,32);
             pointer.enabled = true;
             EditorUtility.SetDirty(pointer);
         }
@@ -346,7 +389,7 @@ public static class PressureTestSceneInstaller
         var bar = Panel("Pressure Bar", root.transform, new Color(.09f,.11f,.15f,.94f));
         SetRect(bar, new Vector2(0,1), new Vector2(0,1), new Vector2(0,1), new Vector2(360,34), new Vector2(24,-24));
 
-        var pointerObject = Panel("Pressure Pointer", bar.transform, new Color(1f,.73f,.12f,1));
+        var pointerObject = Panel("Pressure Pointer", bar.transform, Color.white);
         SetRect(pointerObject, new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(22,32), Vector2.zero);
         var pointer = pointerObject.GetComponent<Image>();pointer.sprite = pointerSprite;pointer.type = Image.Type.Simple;pointer.preserveAspect = true;pointer.raycastTarget = false;
 
@@ -368,6 +411,110 @@ public static class PressureTestSceneInstaller
         var barUI = root.AddComponent<PressureBarUI>();
         barUI.Configure(system, pointer);
         EditorUtility.SetDirty(lowerTrigger);EditorUtility.SetDirty(higherTrigger);EditorUtility.SetDirty(barUI);
+    }
+
+    static void EnsureChoiceWindow(Transform canvas)
+    {
+        if(!canvas)return;
+
+        Font font = AssetDatabase.LoadAssetAtPath<Font>(ChoiceFontPath);
+        if(!font)font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+
+        Transform existingWindow = canvas.Find("Honey Choice Window");
+        if(existingWindow)
+        {
+            ConfigureChoiceWindowText(existingWindow, font);
+            return;
+        }
+
+        Sprite windowSprite = EnsureCroppedSprite(WindowTexturePath, WindowSpritePath, new Rect(304, 411, 1409, 805), "Window Cropped");
+        Sprite choiceSprite = EnsureCroppedSprite(ChoiceTexturePath, ChoiceSpritePath, new Rect(284, 308, 617, 129), "Choice Button Cropped");
+        Sprite pinSprite = EnsureCroppedSprite(PinTexturePath, PinSpritePath, new Rect(316, 296, 109, 145), "Pin Cropped");
+        if(!windowSprite || !choiceSprite || !pinSprite)
+        {
+            Debug.LogWarning("Choice window sprites could not be created. Check Window.png, Choice_bottom.png and Pin.png in Assets/Art/Ui.");
+            return;
+        }
+
+        var window = UIObject("Honey Choice Window", canvas, typeof(Image));
+        SetRect(window, new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(760,435), Vector2.zero);
+        Image windowImage = window.GetComponent<Image>();windowImage.sprite = windowSprite;windowImage.type = Image.Type.Simple;windowImage.preserveAspect = true;windowImage.color = Color.white;
+
+        var pinObject = UIObject("Pin", window.transform, typeof(Image));
+        SetRect(pinObject, new Vector2(0,1), new Vector2(0,1), new Vector2(.5f,.5f), new Vector2(58,77), new Vector2(66,-34));
+        Image pinImage = pinObject.GetComponent<Image>();pinImage.sprite = pinSprite;pinImage.type = Image.Type.Simple;pinImage.preserveAspect = true;pinImage.raycastTarget = false;
+
+        var questionObject = UIObject("Question", window.transform, typeof(Text));
+        SetRect(questionObject, new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(620,70), new Vector2(0,105));
+        Text question = questionObject.GetComponent<Text>();question.font = font;question.text = "What substances can be used to process honey?";question.fontSize = 24;question.alignment = TextAnchor.MiddleCenter;question.color = new Color(.08f,.08f,.08f,1);question.raycastTarget = false;
+
+        Button pollenButton = CreateButton("Pollen Choice Button", window.transform, "Pollen", font, Color.white);
+        SetRect(pollenButton.gameObject, new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(330,70), new Vector2(0,18));
+        Image pollenImage = pollenButton.GetComponent<Image>();pollenImage.sprite = choiceSprite;pollenImage.type = Image.Type.Simple;pollenImage.preserveAspect = true;
+        Text pollenText = pollenButton.transform.Find("Text").GetComponent<Text>();pollenText.fontSize = 25;pollenText.color = new Color(.06f,.06f,.06f,1);
+
+        Button nectarButton = CreateButton("Nectar Choice Button", window.transform, "Nectar", font, Color.white);
+        SetRect(nectarButton.gameObject, new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(.5f,.5f), new Vector2(330,70), new Vector2(0,-78));
+        Image nectarImage = nectarButton.GetComponent<Image>();nectarImage.sprite = choiceSprite;nectarImage.type = Image.Type.Simple;nectarImage.preserveAspect = true;
+        Text nectarText = nectarButton.transform.Find("Text").GetComponent<Text>();nectarText.fontSize = 25;nectarText.color = new Color(.06f,.06f,.06f,1);
+
+        ConfigureChoiceWindowText(window.transform, font);
+        EditorUtility.SetDirty(windowImage);EditorUtility.SetDirty(pollenButton);EditorUtility.SetDirty(nectarButton);
+    }
+
+    static void ConfigureChoiceWindowText(Transform window, Font font)
+    {
+        Transform questionTransform = window.Find("Question");
+        Text question = questionTransform ? questionTransform.GetComponent<Text>() : null;
+        if(question)
+        {
+            question.font = font;
+            question.text = "What substances can be used to process honey?";
+            question.fontSize = 24;
+            question.resizeTextForBestFit = false;
+            question.alignment = TextAnchor.MiddleCenter;
+            question.color = new Color(.08f,.08f,.08f,1);
+            question.raycastTarget = false;
+            EditorUtility.SetDirty(question);
+        }
+
+        ConfigureChoiceLabel(window, "Pollen Choice Button/Text", "Pollen", font);
+        ConfigureChoiceLabel(window, "Nectar Choice Button/Text", "Nectar", font);
+    }
+
+    static void ConfigureChoiceLabel(Transform window, string path, string label, Font font)
+    {
+        Transform labelTransform = window.Find(path);
+        Text text = labelTransform ? labelTransform.GetComponent<Text>() : null;
+        if(!text)return;
+        text.font = font;
+        text.text = label;
+        text.fontSize = 25;
+        text.resizeTextForBestFit = false;
+        text.alignment = TextAnchor.MiddleCenter;
+        text.color = new Color(.06f,.06f,.06f,1);
+        text.raycastTarget = false;
+        EditorUtility.SetDirty(text);
+    }
+
+    static Sprite EnsureCroppedSprite(string texturePath, string spritePath, Rect rect, string spriteName)
+    {
+        Sprite existing = AssetDatabase.LoadAssetAtPath<Sprite>(spritePath);
+        if(existing)return existing;
+
+        Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
+        if(!texture)return null;
+
+        Rect safeRect = new Rect(
+            Mathf.Clamp(rect.x, 0, texture.width - 1),
+            Mathf.Clamp(rect.y, 0, texture.height - 1),
+            Mathf.Clamp(rect.width, 1, texture.width - rect.x),
+            Mathf.Clamp(rect.height, 1, texture.height - rect.y));
+        Sprite sprite = Sprite.Create(texture, safeRect, new Vector2(.5f,.5f), 100f, 0, SpriteMeshType.FullRect);
+        sprite.name = spriteName;
+        AssetDatabase.CreateAsset(sprite, spritePath);
+        AssetDatabase.SaveAssets();
+        return AssetDatabase.LoadAssetAtPath<Sprite>(spritePath);
     }
 
     static void EnsureEventSystem(Scene scene)
