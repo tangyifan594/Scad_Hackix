@@ -7,9 +7,12 @@ using UnityEngine.Events;
 public sealed class PaperPanelController : MonoBehaviour
 {
     [SerializeField] RectTransform paperRoot;
+    [SerializeField] bool useCustomShownPosition;
+    [SerializeField] Vector2 customShownPosition;
     [SerializeField] Vector2 hiddenOffset = new Vector2(1200f, 0f);
     [SerializeField, Min(0.01f)] float slideDuration = 0.5f;
     [SerializeField] bool startHidden = true;
+    [SerializeField] bool keepInteractionWhenHidden;
     [SerializeField] bool useUnscaledTime = true;
     [SerializeField] UnityEvent onSlideInFinished = new UnityEvent();
     [SerializeField] UnityEvent onSlideOutFinished = new UnityEvent();
@@ -19,12 +22,30 @@ public sealed class PaperPanelController : MonoBehaviour
     Coroutine slideCoroutine;
 
     public bool IsShown { get; private set; }
+    public UnityEvent OnSlideInFinished => onSlideInFinished;
+    public UnityEvent OnSlideOutFinished => onSlideOutFinished;
+
+    public void Configure(
+        Vector2 shownAnchoredPosition,
+        Vector2 hiddenAnchoredPosition,
+        float duration,
+        bool allowInteractionWhenHidden = false)
+    {
+        useCustomShownPosition = true;
+        customShownPosition = shownAnchoredPosition;
+        hiddenOffset = hiddenAnchoredPosition - shownAnchoredPosition;
+        slideDuration = Mathf.Max(0.01f, duration);
+        startHidden = true;
+        keepInteractionWhenHidden = allowInteractionWhenHidden;
+    }
 
     void Awake()
     {
         if(!paperRoot)paperRoot = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        shownPosition = paperRoot.anchoredPosition;
+        shownPosition = useCustomShownPosition
+            ? customShownPosition
+            : paperRoot.anchoredPosition;
 
         if(startHidden)
             SetHiddenImmediately();
@@ -55,8 +76,8 @@ public sealed class PaperPanelController : MonoBehaviour
     {
         StopCurrentSlide();
         paperRoot.anchoredPosition = shownPosition + hiddenOffset;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
+        canvasGroup.interactable = keepInteractionWhenHidden;
+        canvasGroup.blocksRaycasts = keepInteractionWhenHidden;
         IsShown = false;
     }
 
@@ -85,8 +106,9 @@ public sealed class PaperPanelController : MonoBehaviour
 
         paperRoot.anchoredPosition = destination;
         IsShown = showing;
-        canvasGroup.interactable = showing;
-        canvasGroup.blocksRaycasts = showing;
+        bool allowInteraction = showing || keepInteractionWhenHidden;
+        canvasGroup.interactable = allowInteraction;
+        canvasGroup.blocksRaycasts = allowInteraction;
         slideCoroutine = null;
 
         if(showing)onSlideInFinished.Invoke();
