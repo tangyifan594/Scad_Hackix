@@ -11,33 +11,17 @@ public static class TestFadeInInstaller
     const string MarkerPath = "Library/TestFadeInInstaller.v1.done";
     const float FadeDuration = 1.5f;
 
-    [InitializeOnLoadMethod]
-    static void ScheduleInstall()
-    {
-        if(!File.Exists(MarkerPath))EditorApplication.delayCall += InstallWhenReady;
-    }
-
-    static void InstallWhenReady()
-    {
-        if(EditorApplication.isCompiling || EditorApplication.isUpdating)
-        {
-            EditorApplication.delayCall += InstallWhenReady;
-            return;
-        }
-
-        if(EditorApplication.isPlayingOrWillChangePlaymode)
-        {
-            EditorApplication.isPlaying = false;
-            EditorApplication.delayCall += InstallWhenReady;
-            return;
-        }
-
-        Install();
-    }
-
     [MenuItem("Tools/Codex/Install Test UI Fade In")]
     public static void Install()
     {
+        // Installation is manual and must never interrupt Play mode.
+        if(EditorApplication.isPlayingOrWillChangePlaymode)return;
+        if(!File.Exists(ScenePath))
+        {
+            Debug.LogWarning("Installation skipped: scene does not exist: " + ScenePath);
+            return;
+        }
+
         Scene scene = SceneManager.GetSceneByPath(ScenePath);
         bool openedHere = !scene.IsValid() || !scene.isLoaded;
         if(openedHere)scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Additive);

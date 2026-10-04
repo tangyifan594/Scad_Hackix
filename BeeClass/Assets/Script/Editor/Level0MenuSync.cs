@@ -45,6 +45,9 @@ public static class Level0MenuSync
         if (EditorApplication.isPlayingOrWillChangePlaymode) return;
         var scene = SceneManager.GetSceneByPath(ScenePath);
         if (!scene.IsValid() || !scene.isLoaded) return;
+        foreach (var root in scene.GetRootGameObjects())
+            foreach (var canvasCandidate in root.GetComponentsInChildren<Canvas>(true))
+                if (canvasCandidate.transform.Find("Campus Quest Image")) return;
         System.IO.Directory.CreateDirectory("Assets/_Recovery");
         string backup = "Assets/_Recovery/Level0-before-menu-sync-" + System.DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".unity";
         if (!EditorSceneManager.SaveScene(scene, backup, true))

@@ -12330,7 +12330,6 @@ GameObject:
   - component: {fileID: 2042566678}
   - component: {fileID: 2042566680}
   - component: {fileID: 2042566679}
-  - component: {fileID: 2042566681}
   m_Layer: 0
   m_Name: pollen_hover
   m_TagString: Untagged
@@ -12395,33 +12394,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042566677}
   m_CullTransparentMesh: 1
---- !u!114 &2042566681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042566677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeb3d43c6fda48d4f91c69456153d251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DropSlot
-  requiredIconId: pollen
-  snapTarget: {fileID: 0}
-  lockIconAfterSnap: 1
-  puzzleChecker: {fileID: 0}
-  highlightImage: {fileID: 0}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  validHoverColor: {r: 0.55, g: 1, b: 0.55, a: 1}
-  invalidHoverColor: {r: 1, g: 0.55, b: 0.55, a: 1}
-  filledColor: {r: 0.75, g: 1, b: 0.75, a: 1}
-  onCorrectIconPlaced:
-    m_PersistentCalls:
-      m_Calls: []
-  onWrongIconDropped:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &2050019741
 PrefabInstance:
   m_ObjectHideFlags: 0

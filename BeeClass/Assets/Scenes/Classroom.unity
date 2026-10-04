@@ -734,6 +734,8 @@ GameObject:
   - component: {fileID: 71613300}
   - component: {fileID: 71613299}
   - component: {fileID: 71613298}
+  - component: {fileID: 71613302}
+  - component: {fileID: 71613303}
   m_Layer: 0
   m_Name: Corridor
   m_TagString: Untagged
@@ -856,6 +858,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 71613303}
+        m_TargetAssemblyTypeName: LeaveSceneButton, Assembly-CSharp
+        m_MethodName: Leave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &71613300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,6 +908,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71613296}
   m_CullTransparentMesh: 1
+--- !u!114 &71613302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71613296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edf037cd42c46d6b3d31ea4a7bc8501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CampusDoorTransition
+  destinationScene: Assets/Scenes/Level2-shinei.unity
+--- !u!114 &71613303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71613296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f1c592266115c429c4f2cff058a73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeaveSceneButton
+  destinationScene: Level3
 --- !u!1001 &89298156
 PrefabInstance:
   m_ObjectHideFlags: 0
