@@ -1379,6 +1379,7 @@ MonoBehaviour:
   rightArm: {fileID: 0}
   followCamera: {fileID: 1727248964}
   useCanvasUI: 0
+  enableMouseLook: 1
   topDown: 0
   firstPerson: 0
   eyeHeight: 1.25
@@ -1406,7 +1407,7 @@ CharacterController:
   m_StepOffset: 0.28
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.95, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!4 &1233957288
 Transform:
   m_ObjectHideFlags: 0
@@ -1741,7 +1742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -511310931620521848, guid: 042d16ada3edcb64fab03c4571db10f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09
+      value: -77
       objectReference: {fileID: 0}
     - target: {fileID: -511310931620521848, guid: 042d16ada3edcb64fab03c4571db10f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2638,11 +2639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ab9ab0c0a77a994ca3cf1462870ef9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.3
+      value: -3.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ab9ab0c0a77a994ca3cf1462870ef9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -541
+      value: -465.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ab9ab0c0a77a994ca3cf1462870ef9b, type: 3}
       propertyPath: m_LocalRotation.w
