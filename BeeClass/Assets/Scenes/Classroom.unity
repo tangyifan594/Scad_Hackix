@@ -681,7 +681,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 797771338}
+      - m_Target: {fileID: 718667044}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -1254,13 +1254,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-<<<<<<< Updated upstream:BeeClass/Assets/Scenes/Test.unity
-    m_Font: {fileID: 12800000, guid: c4b47a25df854410a39988f71f8b7c23, type: 3}
-    m_FontSize: 24
-=======
     m_Font: {fileID: 12800000, guid: 649fba3b5bc439241a6b7f617cd711e7, type: 3}
-    m_FontSize: 31
->>>>>>> Stashed changes:BeeClass/Assets/Scenes/Classroom.unity
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1462,7 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98895f6ad5c269941ad90cd6ffb017be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadeInOnEnable
-  duration: 1.5
+  duration: 0.6
   useUnscaledTime: 1
   disableInteractionDuringFade: 1
 --- !u!225 &188325027
@@ -2328,8 +2323,7 @@ Transform:
   m_LocalPosition: {x: 3.26, y: 0.6989999, z: -3.061}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1289097938}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &283215709
@@ -2660,7 +2654,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1289097938}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3446,7 +3441,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c4b47a25df854410a39988f71f8b7c23, type: 3}
+    m_Font: {fileID: 12800000, guid: 649fba3b5bc439241a6b7f617cd711e7, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
@@ -4471,7 +4466,6 @@ RectTransform:
   - {fileID: 1033782228}
   - {fileID: 2081224968}
   - {fileID: 530089996}
-  - {fileID: 1809692671}
   m_Father: {fileID: 639344293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9150,7 +9144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1289097938}
   - component: {fileID: 1289097939}
-  - component: {fileID: 1289097940}
   m_Layer: 0
   m_Name: Classroom1
   m_TagString: Untagged
@@ -9166,12 +9159,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289097937}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 500}
-  m_LocalScale: {x: 17.661293, y: 17.661293, z: 17.661293}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -270.54, y: -153.301, z: 496.939}
+  m_LocalScale: {x: 16.994604, y: 16.994604, z: 16.994604}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 283215708}
+  m_Father: {fileID: 325624710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1289097939
 SpriteRenderer:
@@ -9232,21 +9225,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1289097940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289097937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 224e8983fca2c594f9cadcc9f0230236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldSpaceBackground
-  targetCamera: {fileID: 283215707}
-  distanceFromCamera: 500
-  overscan: 1.02
 --- !u!1001 &1305810889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11287,7 +11265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1552455946
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11366,7 +11344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1552533340
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11440,11 +11418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98895f6ad5c269941ad90cd6ffb017be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FadeInOnEnable
-<<<<<<< Updated upstream:BeeClass/Assets/Scenes/Test.unity
-  duration: 1.5
-=======
-  duration: 3
->>>>>>> Stashed changes:BeeClass/Assets/Scenes/Classroom.unity
+  duration: 1
   useUnscaledTime: 1
   disableInteractionDuringFade: 1
 --- !u!225 &1552533344
@@ -12730,7 +12704,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c4b47a25df854410a39988f71f8b7c23, type: 3}
+    m_Font: {fileID: 12800000, guid: 649fba3b5bc439241a6b7f617cd711e7, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
@@ -13278,82 +13252,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807846509}
   m_CullTransparentMesh: 1
---- !u!1 &1809692670
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1809692671}
-  - component: {fileID: 1809692673}
-  - component: {fileID: 1809692672}
-  m_Layer: 0
-  m_Name: Pressure Warning
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1809692671
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809692670}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1850271553}
-  m_Father: {fileID: 566478300}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -24}
-  m_SizeDelta: {x: 260, y: 58}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1809692672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809692670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.72, g: 0.08, b: 0.08, a: 0.96}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 1758252780310425978, guid: 54d571b3cacb6744894ef110bcccfe21, type: 2}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1809692673
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809692670}
-  m_CullTransparentMesh: 1
 --- !u!1 &1811578376
 GameObject:
   m_ObjectHideFlags: 0
@@ -13833,85 +13731,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8440513227671027992, guid: 72e231b80f7450647a51de06ac86c031, type: 3}
   m_PrefabInstance: {fileID: 1841349707}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1850271552
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1850271553}
-  - component: {fileID: 1850271555}
-  - component: {fileID: 1850271554}
-  m_Layer: 0
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1850271553
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850271552}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1809692671}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1850271554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850271552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 5e0a374317ae78f41b9dbc866ba9c2c4, type: 2}
-    m_FontSize: 28
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: WARNING
---- !u!222 &1850271555
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850271552}
-  m_CullTransparentMesh: 1
 --- !u!1001 &1860747281
 PrefabInstance:
   m_ObjectHideFlags: 0
