@@ -77,13 +77,14 @@ public class CampusMainMenu : MonoBehaviour
         // Both images use matching framing; only the Start paper changes.
         image.uvRect = new Rect(rect.anchorMin, rect.anchorMax - rect.anchorMin);
         image.raycastTarget = false;
+        // Show the pressed state immediately in the click frame.
+        image.color = Color.white;
         Vector3 originalScale = rect.localScale;
         float elapsed = 0;
-        while (elapsed < .38f)
+        while (elapsed < .3f)
         {
             elapsed += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(elapsed / .38f);
-            image.color = new Color(1, 1, 1, Mathf.Clamp01(t * 4));
+            float t = Mathf.Clamp01(elapsed / .3f);
             rect.localScale = originalScale * (1 + .025f * Mathf.Sin(t * Mathf.PI));
             yield return null;
         }
